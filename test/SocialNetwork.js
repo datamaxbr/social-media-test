@@ -50,6 +50,7 @@ require('chai')
         await socialNetwork.createPost('', { from: author }).should.be.rejected;
 
       })
+
       it ('Post listing feature is enabled', async () => {
         const post = await socialNetwork.posts(postCount)
         assert.equal(post.id.toNumber(), postCount.toNumber(), 'The Id is correct')
@@ -57,6 +58,7 @@ require('chai')
         assert.equal(post.tipAmount, '0', 'The tip amount is correct')
         assert.equal(post.author, author, 'The author is correct')
       })
+      
       it ('Author tipping is allowed', async () => {
         // Track the author balance before purchase
         let oldAuthorBalance
