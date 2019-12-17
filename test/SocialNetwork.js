@@ -34,8 +34,18 @@ require('chai')
       it ('Post creation enabled', async () => {
         result = await socialNetwork.createPost('This is my first post', { from: author })
         postCount = await socialNetwork.postCount()
+
         //Success
         assert.equal(postCount, 1)
+        const event = result.logs[0].args
+        assert.equal(event.id.toNumber(), postCount.toNumber(), 'The Id is correct')
+        assert.equal(event.content, 'This is my first post', 'The content is correct')
+        assert.equal(event.tipAmount, '0', 'The tip amount is correct')
+        assert.equal(event.author, author, 'The author is correct')
+
+        //FAILURE: Post must have content
+        await socialNetwork.createPost('', { from: author }).should.be.rejected;
+
       })
       // it ('Post listing feature is enabled', async () => {
       //   //TODO Fill me in

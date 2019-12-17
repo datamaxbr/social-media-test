@@ -13,11 +13,20 @@ contract SocialNetwork {
     address author;
   }
 
+  event PostCreated(
+    uint id,
+    string content,
+    uint tipAmount,
+    address author    
+    );
+
   constructor() public {
     name = "Worldwide Dapp Lottery";
   }
 
   function createPost(string memory _content) public {
+    //Require valid content
+    require(bytes(_content).length > 0);
     //Increment post count
     postCount ++;
     //Create post in 2 lines
@@ -25,6 +34,7 @@ contract SocialNetwork {
     // posts[postCount] = _post;
     //Create post in 1 line
     posts[postCount]  = Post(postCount, _content, 0, msg.sender);
-
+    //Trigger Event
+    emit PostCreated(postCount, _content, 0, msg.sender);
   }
 }
