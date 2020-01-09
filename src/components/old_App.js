@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
+import logo from '../logo.png';
 import './App.css';
 import SocialNetwork from '../abis/SocialNetwork.json';
 import Navbar from './Navbar';
@@ -28,7 +29,7 @@ class App extends Component {
     const web3 = window.web3
     // Load the account
     const accounts = await web3.eth.getAccounts()
-    // console.log(accounts)
+    console.log(accounts)
     this.setState({ account: accounts[0] })
     // Network ID
     const networkId = await web3.eth.net.getId()
@@ -45,14 +46,15 @@ class App extends Component {
         posts: [...this.state.posts, post]
       })
     }
-      // console.log({ posts: this.state.posts })
+      console.log({ posts: this.state.posts })
     } else {
       window.alert('SocialNetwork contract not deployed to detected network.')
     }  
     
     // Address
     // ABI
-  }  
+
+  }
 
   constructor(props) {
     super(props)
@@ -70,25 +72,33 @@ class App extends Component {
         <Navbar account={this.state.account} />
         <div className="container-fluid mt-5">
           <div className="row">
-            <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '500px'}}>
-              <div className="content mr-auto ml-auto">
-                { this.state.posts.map((post, key) => {
-                  return(
-                    <div className="card mb-4" key={key}>
-                      <div className="card-header">
-                        <small className="text-muted">Post Header</small>
-                      </div>
-                      <ul id="postList" className="list-group list-group-flush">
-                        <li className="list-group-item">
-                          <p>Post Body</p>
-                        </li>
-                        <li key={key} className="list-group-item py-2">
-                          <p>Post Footer</p>
-                        </li>
-                      </ul>
-                    </div>
-                  )
-                })}               
+            <main role="main" className="col-lg-12 d-flex text-center">
+              <div className="content mr-auto ml-auto"> <br/>
+                <a
+                  href="https://cyberassistance.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                <img src={logo} className="App-logo" alt="logo" />
+                </a>
+                <br/><br/>
+                <h1>Decentralized Social Network</h1>
+                <h1>ETH DAPP Demonstration</h1>
+                <p>
+                  Using Smart Contracts with Ether on the Ethereum Network 
+                </p>
+                <p>
+                  Allowing any authors to post new content <br/>
+                  and allowing any readers to tip the authors.  
+                </p>
+                <a
+                  className="App-link"
+                  href="https://cyberassistance.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  BLOCKCHAIN WORKBENCH AREA
+                </a>
               </div>
             </main>
           </div>
